@@ -1,0 +1,108 @@
+{% extends 'layouts/main.html' %} 
+{% load static  %}
+{% block css %}
+<style>
+    /* Reusable styles for both Login and Register */
+.body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 100%;
+}
+
+.auth-form h2 { margin-bottom: 8px; color: #333; }
+.auth-form p { color: #777; margin-bottom: 24px; font-size: 0.9rem; }
+
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.85rem; }
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+.action-btn {
+    width: 20%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.action-btn:hover {
+        background-color: #3a4c9e;
+}
+.footer-link {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.message { text-align: center; margin-top: 10px; font-weight: 500; }
+</style>    
+{% endblock css %}
+
+
+{% block body %}
+ <div class="form-container" mothod="post">
+    {% csrf_token %} 
+        <form id="regForm" class="auth-form">
+            <h2>Create Account</h2>
+            <p>Join us today! It only takes a minute.</p>
+            
+            <div class="input-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="username" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="name@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="pass1">Password</label>
+                <input type="password" id="pass1" name="password" placeholder="Create password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="pass2">Confirm Password</label>
+                <input type="password" id="pass2" name="confirmpassword" placeholder="Repeat password" required>
+            </div>
+
+            <button type="submit" class="action-btn">Sign Up</button>
+            <p class="message" id="regMessage"></p>
+            
+            <div class="footer-link">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </form>
+        {%for messages in messages%}
+         <h5 style="color: rgb(194, 8, 8);text-align: center;">{{messages}}</h5>
+        {%endfor%}
+    </div>
+{% endblock body %}
