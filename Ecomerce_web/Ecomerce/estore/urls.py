@@ -9,6 +9,7 @@ urlpatterns = [
     path('collections',views.collections, name="collections"),
     path('loging',views.loging, name="loging"),
     path('register',views.register, name="register"),
+    path('logout',views.logout, name="logout"),
     
    
 ]

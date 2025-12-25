@@ -836,15 +836,16 @@
                 <p class="gentle-subtitle">Sign in to your peaceful space</p>
             </div>
             
-            <form class="comfort-form" id="loginForm" novalidate>
-                <label for="email" style="font-size: 11px;margin-left:9px;bottom:7px" >Email address</label>
+            <form class="comfort-form" action=" " method="post" id="loginForm" novalidate>
+                {% csrf_token %}
+                <label for="Username" style="font-size: 11px;margin-left:9px;bottom:7px" >Username</label>
                 <div class="soft-field">
                     <div class="field-container">
-                        <input type="email" id="email" name="email" required autocomplete="email" placeholder="Email address">
+                        <input type="" id="Username" name="username" required autocomplete="Username" placeholder="Username">
                         
-                        <div class="field-accent">d</div>
+                        <div class="field-accent"></div>
                     </div>
-                    <span class="gentle-error" id="emailError"></span>
+                    <span class="gentle-error" id=""></span>
                 </div>
                 <label for="password"style="font-size: 11px;margin-left:9px;bottom:7px" >Password</label>
                 <div class="soft-field">
@@ -892,6 +893,9 @@
                     <div class="button-glow"></div>
                 </button>
             </form>
+            {%for messages in messages%}
+                <h6 style="color: rgb(194, 8, 8);">{{messages}}</h6>
+            {%endfor%}
 
             <div class="gentle-divider">
                 <div class="divider-line"></div>

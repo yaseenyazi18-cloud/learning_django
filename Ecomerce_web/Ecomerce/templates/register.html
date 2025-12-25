@@ -68,15 +68,15 @@
 
 
 {% block body %}
- <div class="form-container" mothod="post">
-    {% csrf_token %} 
-        <form id="regForm" class="auth-form">
+ <div class="form-container"> 
+        <form id="regForm" class="auth-form" action="" method="post">
+          {% csrf_token %}
             <h2>Create Account</h2>
             <p>Join us today! It only takes a minute.</p>
             
             <div class="input-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="username" placeholder="Full Name" required>
+                <label for="fullName">Username</label>
+                <input type="text" id="fullName" name="username" placeholder="Username" required>
             </div>
 
             <div class="input-group">
@@ -89,20 +89,16 @@
                 <input type="password" id="pass1" name="password" placeholder="Create password" required>
             </div>
 
-            <div class="input-group">
-                <label for="pass2">Confirm Password</label>
-                <input type="password" id="pass2" name="confirmpassword" placeholder="Repeat password" required>
-            </div>
-
             <button type="submit" class="action-btn">Sign Up</button>
             <p class="message" id="regMessage"></p>
             
+             </form>
+            {%for messages in messages%}
+                <h6 style="color: rgb(194, 8, 8);">{{messages}}</h6>
+            {%endfor%}
             <div class="footer-link">
                 Already have an account? <a href="login.html">Login here</a>
             </div>
-        </form>
-        {%for messages in messages%}
-         <h5 style="color: rgb(194, 8, 8);text-align: center;">{{messages}}</h5>
-        {%endfor%}
+       
     </div>
 {% endblock body %}
