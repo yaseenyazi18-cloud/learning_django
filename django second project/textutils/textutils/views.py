@@ -1,13 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+# def index(request):
+#     yazi = "Hey I'm Muhammed Yasseem"
+#     hana = "Hey i'm Hana Fathima"
+#     data = {'yzi':yazi,
+#             'hana':hana
+#     }
+#     return render(request, "index.html", data)
 def index(request):
-    yazi = "Hey I'm Muhammed Yasseem"
-    hana = "Hey i'm Hana Fathima"
-    data = {'yzi':yazi,
-            'hana':hana
-    }
-    return render(request, "index.html", data)
+    return render(request, 'index.hyml')
 
 def analyze(request):
     if request.method == "GET":
@@ -20,30 +22,54 @@ def analyze(request):
         punctuation = """!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
         analyzed = ""
         if removeponc == "on":
-            
             for char in text:
-                if char not in punctuation:
-                   analyzed = analyzed + char
-                
-        if capitalize == "on":
-                analyzed = text.upper()
+                if char in punctuation:
+                   text = text.replace(char,"")
+                else:
+                    analyzed += char
 
-        if lowercase == "on":
-            analyzed = text.lower()
+                  
+        if  capitalize == "on" and lowercase == "on" or capitalize == "off" and lowercase == "off":
+            if capitalize == "off" and lowercase == "off":
+                data = {
+                    
+                'text': text,
+                }
+            elif capitalize == "on" and lowercase == "on":
+                data = {
+                    'error': True,
+                    'error_msg': "You cannot select both Uppercase and Lowercase at the same time."
+                }
+            return render(request, "analyze.html", data) 
+           
+        elif capitalize == "on":
+            analyzed = text.upper()
+            error = False   
+
+        elif lowercase == "on":
+           analyzed = text.lower()
+           error = False
               
              
-            data = { 
-                    'text':analyzed
+        data = { 
+            'text':analyzed,
+            'error':error
             }
+        
+        return render(request, "analyze.html", data)  
+    else:
+        data = {
+            'text':text
+            }
+        return render(request, "analyze.html", data) 
                    
 
 
                   
-        else:
-            return HttpResponse("Error")
+       
 
 
-    return render(request, "analyze.html", data)            
+             
         # if Capitalize == "on":
            
         #     for char in text:
