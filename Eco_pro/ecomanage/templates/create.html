@@ -1,7 +1,12 @@
-<ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
+{% extends 'main.html' %}
+{% block abc%} 
 <h1>Create page</h1>
+<form action="" method="post" enctype="multipart/form-data">
+   {% csrf_token %} 
+   Name: <input type="text" name="name">
+   Year: <input type="text"name="year">
+   spec: <input type="text"name="spec">
+   <button type="submit">create</button>
+</form>
+{% endblock abc %}
+
