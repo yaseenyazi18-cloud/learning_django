@@ -1,15 +1,20 @@
 
 {%include 'menu.html' %}
+{% block abc%}
 <h1>List page</h1>
+<table>
+    <tr>
+       <th>tittle</th>
+       <th>spec</th>
+       <th>year</th> 
+    </tr>
 {%for lp in laptop %}
-<h1>Laptop Name : {{lp.name | upper}}</h1>
-{%load static%}
-<img src="{% static 'images/' %}{{lp.img}}" alt="">
-<p>Laptop Spec : {{lp.spec}}</p>
-<h4>Used Year : {{lp.year}}</h4>
-{% if sucess %}
-<p>Laptop awailable</p>
-{% else %}
-<p>laptop not available</p>
-{%endif%}
+<tr>
+<td><h1>Laptop Name : {{lp.name | upper}}</h1></td>
+<td><p>Laptop Spec : {{lp.spec}}</p></td>
+<td><h4>Used Year : {{lp.year}}</h4></td>
+</tr>
 {%endfor%}
+</table>
+
+{% endblock abc%}
