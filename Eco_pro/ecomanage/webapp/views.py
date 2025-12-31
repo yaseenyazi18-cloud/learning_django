@@ -16,9 +16,32 @@ def create(request):
     return render(request,'create.html', {'frm' : frm })
 
 
-def edit(request):
-    return render(request, 'edit.html')
+def edit(request,pk):
+    instance_edited = lapInfo.objects.get(pk=pk)
+    if request.POST:
+        frm = lapInfo(request.POST,instance=instance_edited)
+        if frm.is_valid():
+            instance_edited.save()
+        # tittle=request.POST.get('name')
+        # spec=request.POST.get('spec')
+        # year=request.POST.get('year')
+        # instance_edited.name=tittle
+        # instance_edited.spec=spec
+        # instance_edited.year=year
+    else:
+        frm = lapform(instance=instance_edited)    
+    
+    return render(request, 'create.html', {'frm':frm })
+
+
+def delete(request, pk):
+    instance = lapInfo.objects.get(pk=pk)
+    instance.delete()
+    lap = lapInfo.objects.all()
+    return render(request, 'list.html', {'laptop':lap})
+    
 
 def list(request):
     lap = lapInfo.objects.all()
+    print(lap)
     return render(request, 'list.html', {'laptop':lap})

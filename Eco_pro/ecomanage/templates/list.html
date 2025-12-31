@@ -6,13 +6,15 @@
     <tr>
        <th>tittle</th>
        <th>spec</th>
-       <th>year</th> 
+       <th>year</th>
+       <th>Edit/Delete</th> 
     </tr>
 {%for lp in laptop %}
 <tr>
-<td><h1>Laptop Name : {{lp.name | upper}}</h1></td>
+<td><h1>{{lp.name | upper}}</h1></td>
 <td><p>Laptop Spec : {{lp.spec}}</p></td>
 <td><h4>Used Year : {{lp.year}}</h4></td>
+ <td><a href="{% url 'edit' lp.id %}">Edit</a>/<a href="{% url 'delete' lp.id %}">Delete </a></td> 
 </tr>
 {%endfor%}
 </table>
